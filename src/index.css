@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans antialiased text-gray-900 bg-white;
+  }
+}
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* stagger helpers */
+  .reveal-delay-1 {
+    transition-delay: 0.1s;
+  }
+  .reveal-delay-2 {
+    transition-delay: 0.2s;
+  }
+  .reveal-delay-3 {
+    transition-delay: 0.3s;
+  }
+  .reveal-delay-4 {
+    transition-delay: 0.4s;
+  }
+}
+/* Hero particle background — add under @layer components or global CSS */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -10;
+  overflow: hidden;
+}
+
+/* subtle radial sheen to sit on top of gradient */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  left: var(--left, 50%);
+  top: var(--top, 50%);
+  width: var(--size, 32px);
+  height: var(--size, 32px);
+
+  background: rgba(16, 185, 129, var(--opacity, 0.06));
+  border-radius: 9999px;
+  filter: blur(var(--blur, 6px));
+
+  transform: translate3d(0, 0, 0);
+  animation: hero-float var(--duration, 20s) ease-in-out var(--delay, 0s)
+    infinite;
+
+  will-change: transform;
+}
+
+@keyframes hero-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(var(--dx, 20px), var(--dy, -30px), 0)
+      scale(var(--scale, 1.06));
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle {
+    animation: none !important;
+    filter: none !important;
+  }
+}
