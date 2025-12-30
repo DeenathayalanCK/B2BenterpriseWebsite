@@ -180,13 +180,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   >
                     Contact Us
                   </Link>
-                  <Link
-                    to="/insights"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm text-gray-700 hover:text-teal-600"
-                  >
-                    Insights
-                  </Link>
                 </div>
               </div>
             </div>
